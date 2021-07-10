@@ -1,0 +1,28 @@
+doctype html
+html(lang="en")
+    head
+        include partials/header
+    body.login 
+        .contenedor-formulario
+            h1 Inicia Session en UpTaks
+            
+            if locals.mensajes
+                .alertas
+                    each categoria in Object.keys(locals.mensajes)
+                        each error in mensajes[categoria]
+                            .alerta(class=`${categoria}`)
+                                p= error
+
+                                
+            form#formulario.caja.caja-login(action="/iniciar-sesion", method="POST")
+                .campo
+                    label(for="Email") E-mail
+                    input(type="text" name="email" value=email placeholder="Tu E-mail")
+                .campo 
+                    label(for="Password") Password
+                    input(type="password" name="password" value=password placeholder="Tu Password" ) 
+                .campo.enviar
+                    input.boton(type="submit" value="Iniciar Session")
+                .campo.acciones
+                    a(href="/crear-cuenta") ¿Aun no tienes cuenta? Crea una Gratis
+                    a(href="/restablecer")  ¿Olvidaste tu contraseña? 
